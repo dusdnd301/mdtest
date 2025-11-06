@@ -673,3 +673,98 @@
 | `findByStudyRoomIdAndMemberId` | `Long, Long` | `Optional<StudyRoomParticipant>` | 특정 멤버 참여 |
 | `countByStudyRoomId` | `Long` | `long` | 참여자 수 |
 | `deleteByStudyRoomIdAndMemberId` | `Long, Long` | `void` | 특정 멤버 삭제 |
+
+---
+
+## 3.6 체크리스트 Class diagram
+![체크리스트 Diagram](images/체크리스트_diagram.png)
+
+**Description:** 체크리스트 도메인의 구조와 주요 동작을 한눈에 정리한다.
+
+### Checklist (Entity)
+**Attributes**
+
+| Name         | Type        | Visibility | Description                  |
+|---|---|---|---|
+| id           | Long        | private    | 체크리스트 PK                |
+| member       | Member      | private    | 소유 사용자(FK=member_id)    |
+| targetDate   | LocalDate   | private    | 대상 날짜                    |
+| content      | String      | private    | 항목 내용                     |
+| isCompleted  | boolean     | private    | 완료 여부                    |
+
+**Operations**
+
+| Name            | Argument              | Returns | Description        |
+|---|---|---|---|
+| complete        | -                     | void    | 완료로 전환        |
+| uncomplete      | -                     | void    | 미완료로 전환      |
+| updateContent   | String newContent     | void    | 내용 수정          |
+
+---
+
+### DTOs
+**ChecklistCreateDto** — 생성 요청  
+**Attributes**
+
+| Name       | Type       | Validation                                            | Description |
+|---|---|---|---|
+| targetDate | LocalDate  | `@NotNull("날짜를 선택해야 합니다.")`                 | 대상 날짜   |
+| content    | String     | `@NotBlank("내용을 입력해주세요")`                   | 내용        |
+
+**ChecklistUpdateDto** — 내용 수정 요청  
+**Attributes**
+
+| Name    | Type   | Validation                                        | Description |
+|---|---|---|---|
+| content | String | `@NotBlank("내용을 입력해주세요.")`               | 수정 내용    |
+
+**ChecklistResponseDto** — 조회/생성/수정 응답  
+**Attributes**
+
+| Name         | Type       | Description |
+|---|---|---|
+| id           | Long       | PK          |
+| targetDate   | LocalDate  | 대상 날짜    |
+| content      | String     | 항목 내용    |
+| isCompleted  | boolean    | 완료 여부    |
+
+---
+
+### ChecklistRepository
+**Operations**
+
+| Name                                    | Argument                                             | Returns               | Description            |
+|---|---|---|---|
+| findByMemberIdAndTargetDate             | Long memberId, LocalDate date                        | List<Checklist>       | 특정 날짜 조회         |
+| findByIdAndMemberId                     | Long id, Long memberId                               | Optional<Checklist>   | 소유자 검증 단건 조회  |
+| findByMemberIdAndTargetDateBetween      | Long memberId, LocalDate start, LocalDate end        | List<Checklist>       | 기간 조회              |
+| save                                    | Checklist                                            | Checklist             | 저장/수정              |
+| deleteById                              | Long id                                              | void                  | 삭제                   |
+
+---
+
+### ChecklistService
+**Operations**
+
+| Name            | Argument                                                | Returns                   | Description        |
+|---|---|---|---|
+| create          | Long memberId, ChecklistCreateDto                        | ChecklistResponseDto      | 항목 생성          |
+| update          | Long memberId, Long checklistId, ChecklistUpdateDto      | ChecklistResponseDto      | 내용 수정          |
+| toggleComplete  | Long memberId, Long checklistId                          | ChecklistResponseDto      | 완료/미완료 전환   |
+| getDaily        | Long memberId, LocalDate date                            | List<ChecklistResponseDto>| 하루치 조회        |
+| getRange        | Long memberId, LocalDate start, LocalDate end            | List<ChecklistResponseDto>| 기간 조회          |
+| delete          | Long memberId, Long checklistId                          | void                      | 삭제               |
+
+---
+
+### ChecklistController (REST)
+**Endpoints**
+
+| Method | Path                                             | Request                  | Response                      | Description     |
+|---|---|---|---|---|
+| POST   | /api/checklists                                   | ChecklistCreateDto       | ChecklistResponseDto          | 생성            |
+| PUT    | /api/checklists/{id}                              | ChecklistUpdateDto       | ChecklistResponseDto          | 내용 수정       |
+| PATCH  | /api/checklists/{id}/complete                     | —                        | ChecklistResponseDto          | 완료 토글       |
+| GET    | /api/checklists?date=YYYY-MM-DD                   | —                        | List<ChecklistResponseDto>    | 하루치 조회     |
+| GET    | /api/checklists?start=YYYY-MM-DD&end=YYYY-MM-DD   | —                        | List<ChecklistResponseDto>    | 기간 조회       |
+| DELETE | /api/checklists/{id}                              | —                        | 204 No Content                | 삭제            |
