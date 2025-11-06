@@ -6,7 +6,7 @@
 
 ## 3.1 DB 관리 Class diagram
 ## DB Class Diagram
-![DB class diagram](images/DB_class_diagram.png)
+![DB class diagram](images/DB_class_ diagram.png)
 
 ### MemberRepository
 **Description:** 회원 엔티티를 관리하는 인터페이스
@@ -193,7 +193,7 @@
 ---
 
 ## 3.3 인증/보안 Class diagram
-
+![인증/보안 Class Diagram](images/인증_보안_class_diagram.png)
 ### CustomUser
 **Description:** Spring `User` 확장, 사용자 고유 정보 보유
 
@@ -284,7 +284,7 @@
 ---
 
 ## 3.4 오픈 스터디 기능 Class diagram
-
+![오픈 스터디 기능 Class Diagram](images/오픈스터디_diagram.png)
 ### OpenStudyRoomController
 **Description:** 오픈 스터디 관련 API
 
@@ -437,7 +437,7 @@
 ## 3.5 그룹 스터디 Class diagram
 
 ### 3.5.1 Domain
-
+![그룹스터디 Domain](images/그룹스터디_domain.png)
 #### Group (Entity)
 **Description:** 스터디 그룹 기본 정보
 
@@ -517,7 +517,7 @@
 ---
 
 ### 3.5.2 DTO
-
+![그룹스터디 DTO](images/그룹스터디_dto.png)
 #### AddGroupMemberRequest
 | **Name** | **Type** | **Visibility** | **Description** |
 |---|---|---|---|
@@ -575,7 +575,7 @@
 ---
 
 ### 3.5.3 Services
-
+![그룹스터디 Service](images/그룹스터디_service.png)
 #### GroupService
 **Operations**
 
@@ -613,7 +613,7 @@
 ---
 
 ### 3.5.4 Controllers
-
+![그룹스터디 Controller](images/그룹스터디_controller.png)
 #### GroupController
 | **Name** | **Argument** | **Returns** | **Description** |
 |---|---|---|---|
@@ -644,7 +644,7 @@
 ---
 
 ### 3.5.5 Repositories
-
+![그룹스터디 Repository](images/그룹스터디_repository.png)
 #### GroupRepository
 | **Name** | **Argument** | **Returns** | **Description** |
 |---|---|---|---|
