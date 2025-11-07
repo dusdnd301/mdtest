@@ -6,7 +6,7 @@
 
 ## 3.1 DB 관리 Class diagram
 ## DB Class Diagram
-<img width="535" height="321" alt="DB class diagram" src="images/DB_class_diagram.png" />
+<img width="535" height="321" alt="DB class diagram" src="https://github.com/dusdnd301/mdtest/blob/main/images/DB_class_%20diagram.png" />
 
 
 ### MemberRepository
