@@ -6,7 +6,8 @@
 
 ## 3.1 DB 관리 Class diagram
 ## DB Class Diagram
-![DB class diagram](images/DB_class_ diagram.png)
+<img width="535" height="321" alt="DB class diagram" src="images/DB_class_diagram.png" />
+
 
 ### MemberRepository
 **Description:** 회원 엔티티를 관리하는 인터페이스
