@@ -553,7 +553,7 @@
 
 ### 3.5.2 DTO
 
-<img width="1350" height="7000" alt="Image" src="https://github.com/user-attachments/assets/157b953e-8654-4597-983f-d74366e522e1" />
+<img width="6350" height="7000" alt="Image" src="https://github.com/user-attachments/assets/157b953e-8654-4597-983f-d74366e522e1" />
 
 #### AddGroupMemberRequest
 
